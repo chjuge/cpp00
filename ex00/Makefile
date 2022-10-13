@@ -6,11 +6,11 @@
 #    By: mproveme <mproveme@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/13 18:52:44 by mproveme          #+#    #+#              #
-#    Updated: 2022/10/13 18:55:18 by mproveme         ###   ########.fr        #
+#    Updated: 2022/10/13 19:09:04 by mproveme         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-RCS		=	ex00.cpp
+SRCS		=	ex00.cpp
 
 OBJS	= 	$(SRCS:.c=.o)
 
