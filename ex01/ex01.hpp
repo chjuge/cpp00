@@ -6,7 +6,7 @@
 /*   By: mproveme <mproveme@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:27:09 by mproveme          #+#    #+#             */
-/*   Updated: 2022/10/15 12:04:02 by mproveme         ###   ########.fr       */
+/*   Updated: 2022/10/15 14:16:19 by mproveme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define NNAME	"Nickname"
 # define NUMBER	"Phone Number"
 # define SECRET	"Darkest secret"
+# define TEMPL	"TEMPLATE"
 
 class Contact
 {
@@ -53,7 +54,10 @@ public:
 	std::string get_ph_number(void);
 	std::string get_secret(void);
 
-	void display_contact(void);
+	void fill_template(void);
+	void display_contact(int index);
+	void display_full_contact(void);
+
 };
 
 
@@ -72,11 +76,15 @@ public:
 	~PhoneBook(void);
 	void add_contact(void);
 	void search_contact(void);
+	void display_one(int index);
+	void display_all(void);
+	void fill_templates(void);
 };
 
 std::string input_field(std::string str);
 std::string input_cmd(void);
 void		display_pipe(void);
-void 		display_tab(std::string p1, std::string p2, std::string p3, std::string p4, std::string p5);
+void 		display_tab(std::string p1, std::string p2,
+						std::string p3, std::string p4);
 
 #endif
