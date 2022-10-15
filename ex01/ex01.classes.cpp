@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mproveme <mproveme@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 16:28:21 by mproveme          #+#    #+#             */
-/*   Updated: 2022/10/15 11:42:51 by mproveme         ###   ########.fr       */
+/*   Created: 2022/10/15 14:06:41 by mproveme          #+#    #+#             */
+/*   Updated: 2022/10/15 14:06:48 by mproveme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,30 @@ std::string Contact::get_secret(void)
 	return (this->secret);
 }
 
-void	Contact::display_contact(void)
+void	Contact::display_contact(int index)
 {
-	display_tab(this->get_first_name(),
+	display_tab(std::to_string(index),
+				this->get_first_name(),
 				this->get_last_name(),
-				this->get_nickname(),
-				this->get_ph_number(),
-				this->get_secret());
+				this->get_nickname());
+}
+
+void	Contact::display_full_contact(void)
+{
+	std::cout << this->first_name << std::endl;
+	std::cout << this->last_name << std::endl;
+	std::cout << this->nickname << std::endl;
+	std::cout << this->ph_number << std::endl;
+	std::cout << this->secret << std::endl;
+}
+
+void	Contact::fill_template(void)
+{
+	this->set_first_name("Vasya");
+	this->set_last_name("Pupkin");
+	this->set_nickname("npocto_noBeJlutelb");
+	this->set_ph_number("8 800 555 35 35");
+	this->set_secret("Proshe pozvonit', chem u kogo-to zanimat'");
 }
 
 PhoneBook::PhoneBook(void)
@@ -120,7 +137,24 @@ void PhoneBook::set_saved(void)
 
 void PhoneBook::display_header(void)
 {
-	display_tab(FNAME, LNAME, NNAME, NUMBER, SECRET);
+	display_tab("Index", FNAME, LNAME, NNAME);
+}
+
+void PhoneBook::display_all(void)
+{
+	this->display_header();
+	for (int i = 0; i < this->saved; i++)
+	{
+		this->contacts[i].display_contact(i + 1);
+	}
+}
+
+void PhoneBook::display_one(int index)
+{
+	if (index <= this->saved)
+		this->contacts[index].display_full_contact();
+	else
+		std::cout << "There no contact of index " << index << std::endl;
 }
 
 void PhoneBook::search_contact(void)
@@ -130,9 +164,38 @@ void PhoneBook::search_contact(void)
 		std::cout << "Phonebook is empty" << std::endl;
 		return;
 	}
-	this->display_header();
-	for (int i = 0; i < this->saved; i++)
+	else
+		this->display_all();
+	
+	std::string res;
+	int	ind;
+	while (1)
 	{
-		this->contacts[i].display_contact();
+		std::cout << "[EXIT] to exit search, [index] to show contact (1-8), [ALL] to show all contacts";
+		std::cout << std::endl;
+		std::cin >> res;
+		std::cin.clear();
+		if (res.compare(EXIT) == 0)
+			break;
+		if (res.compare("ALL") == 0)
+			this->display_all();
+		else
+		{
+			ind = atoi(res.c_str());
+			if (ind < 1 || ind > 8)
+				std::cout << "You inputed wrong data" << std::endl;
+			else
+				this->display_one(ind - 1);
+		}
+	}
+}
+
+void PhoneBook::fill_templates(void)
+{
+	for (int i = 0; i < 8; i++)
+	{
+		this->contacts[i].fill_template();
+		this->set_current();
+		this->set_saved();
 	}
 }
