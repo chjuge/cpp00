@@ -6,7 +6,7 @@
 /*   By: mproveme <mproveme@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:27:09 by mproveme          #+#    #+#             */
-/*   Updated: 2022/10/14 19:15:43 by mproveme         ###   ########.fr       */
+/*   Updated: 2022/10/15 12:04:02 by mproveme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # define SEARCH "SEARCH"
 # define EXIT "EXIT"
 # define W	10
-# define FNAME	"first name:"
-# define LNAME	"first name:"
-# define NNAME	"nickname:"
-# define NUMBER	"phone number:"
-# define SECRET	"darkest secret:"
+# define FNAME	"First Name"
+# define LNAME	"Last Name"
+# define NNAME	"Nickname"
+# define NUMBER	"Phone Number"
+# define SECRET	"Darkest secret"
 
 class Contact
 {
@@ -38,27 +38,45 @@ class Contact
 public:
 	Contact(void);
 	~Contact(void);
+
 	void set_first_name(std::string str);
 	void set_last_name(std::string str);
 	void set_nickname(std::string str);
 	void set_ph_number(std::string str);
 	void set_secret(std::string str);
+
+	void set_contact(void);
+
+	std::string get_first_name(void);
+	std::string get_last_name(void);
+	std::string get_nickname(void);
+	std::string get_ph_number(void);
+	std::string get_secret(void);
+
+	void display_contact(void);
 };
 
 
 class PhoneBook
 {
-	Contact 	arr[8];
-	// std::time_t time_of_entry[8];
-	int		oldest;
+	Contact	contacts[8];
 	int		current;
+	int		saved;
+
+	void set_current(void);
+	void set_saved(void);
+	void display_header(void);
 
 public:
 	PhoneBook(void);
 	~PhoneBook(void);
-	void set_oldest(void);
-	void set_current(void);
 	void add_contact(void);
+	void search_contact(void);
 };
+
+std::string input_field(std::string str);
+std::string input_cmd(void);
+void		display_pipe(void);
+void 		display_tab(std::string p1, std::string p2, std::string p3, std::string p4, std::string p5);
 
 #endif
